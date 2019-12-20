@@ -120,9 +120,6 @@ function winLog(x, y) {
   }
 }
 
-
-
-
 function plantFlag(x, y) {
   var cell = board[y][x]
   if (cell.isOpen) {
@@ -168,8 +165,6 @@ function checkIfmine(x, y) {
     }
   }
 }
-
-
 
 function plantMines() {
   var mPlanted = 0;
@@ -254,10 +249,7 @@ function revealNei(x, y) {
 
   }
 
-
-
 }
-
 
 
 function checkCell(x, y) {
