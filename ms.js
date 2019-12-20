@@ -3,9 +3,9 @@ var columns = 5;
 var board = [];
 const mineCount = 7;
 var minesFlagged = 0;
-var boardSize = rows*columns;
+var boardSize = rows * columns - mineCount;
 
-document.getElementById("mLeft").innerHTML = "Mines flagged: " + minesFlagged
+document.getElementById("mLeft").innerHTML = "Mines on board: " + mineCount
 
 var images = [
   ["https://user-images.githubusercontent.com/56004853/68697439-16d0f580-057f-11ea-8954-f47b9edb0ca9.jpg", //empty
@@ -49,6 +49,7 @@ function genGrid() {
 
     var tRows = document.createElement("tr") //creates table rows element
 
+
     for (var x = 0; x < columns; x++) {
       //for each row & column
       var cell = {
@@ -75,37 +76,52 @@ function genGrid() {
       btn.appendChild(imges); //appending button to data
       cell.button = imges; //button is eq. to dom img el.
 
+
       imges.oncontextmenu = function(event) {
         event.preventDefault();
         plantFlag(this.x, this.y)
+
+
       }.bind({
         x: x,
         y: y
       })
 
       imges.onclick = function() {
-        checkCell(this.x, this.y)			
+        checkCell(this.x, this.y)
+
       }.bind({
         x: x,
         y: y
       })
 
     }
-	  
     msTable.appendChild(tRows); //appending rows to table
+
 
   }
   boardId.appendChild(msTable); //appending table to divEl
 
   plantMines();
   neibr();
-  
+
+}
+
+function winLog(x, y) {
+  var cell = board[y][x]
+  if (cell.value == 0 && cell.isOpen == true) {
+    boardSize--
+    console.log(boardSize)
+  }
+  if (boardSize == 0) {
+    alert("You won!")
+    resetBoard();
+
+  }
 }
 
 
-function updateMinesFlagged() {
-  document.getElementById("mLeft").innerHTML = "Mines flagged: " + minesFlagged;
-}
+
 
 function plantFlag(x, y) {
   var cell = board[y][x]
@@ -144,13 +160,15 @@ function checkIfmine(x, y) {
     }
 
     console.log(minesFlagged)
-    updateMinesFlagged();
-    if(minesFlagged == mineCount){
-    alert("You won !")
-    resetBoard();
+
+
+    if (minesFlagged == mineCount) {
+      alert("You won !")
+      resetBoard();
     }
   }
 }
+
 
 
 function plantMines() {
@@ -168,6 +186,7 @@ function plantMines() {
   }
 }
 /* if its not a mine look for field that is not a mine and plant a mine & increase planted count + 1 */
+//console.log(board)
 
 function neibr() {
 
@@ -204,6 +223,7 @@ function revealCell(x, y) {
   var cell = board[y][x]
   cell.isOpen = true;
   cell.button.setAttribute("src", getImg(cell.value, cell.countVal))
+  winLog(x, y)
 }
 
 function revealNei(x, y) {
@@ -216,12 +236,13 @@ function revealNei(x, y) {
 
   if (cell.value == 0 && cell.countVal > 0) {
     revealCell(x, y)
+
     return;
   }
 
   if (cell.value == 0 && cell.countVal == 0) {
     revealCell(x, y)
-		
+
     revealNei(x, y + 1)
     revealNei(x, y - 1)
     revealNei(x + 1, y + 1)
@@ -230,9 +251,14 @@ function revealNei(x, y) {
     revealNei(x - 1, y + 1)
     revealNei(x - 1, y)
     revealNei(x + 1, y)
-    
-  }    
+
+  }
+
+
+
 }
+
+
 
 function checkCell(x, y) {
   if (!inBounds(x, y))
@@ -243,11 +269,13 @@ function checkCell(x, y) {
     return;
 
   if (cell.value == 0 && cell.countVal > 0) {
-    revealCell(x, y);		
+    revealCell(x, y);
+
   }
 
   if (cell.value == 0 && cell.countVal == 0) {
     revealNei(x, y)
+
     return;
   }
   if (cell.value == 1) {
@@ -257,9 +285,9 @@ function checkCell(x, y) {
     alert("Game Over!");
     resetBoard();
     minesFlagged = 0
-    updateMinesFlagged();
+
   }
-  }
+}
 
 function traverse() {
   for (var y = 0; y < rows; y++) {
@@ -267,6 +295,7 @@ function traverse() {
       var cell = board[y][x]
       if (cell.value == 1) {
         revealCell(x, y);
+
       }
     }
   }
@@ -282,11 +311,12 @@ function resetBoard() {
       getEl.removeChild(getEl.lastChild)
 
     }
-    
+
     genGrid();
     minesFlagged = 0;
-  	updateMinesFlagged();
-    console.log(board)
+
+    boardSize = rows * columns - mineCount;
+    console.log(board);
   }
 }
 
@@ -300,7 +330,8 @@ function manualReset() {
 
   genGrid();
   minesFlagged = 0;
-  updateMinesFlagged();
+
+  boardSize = rows * columns - mineCount;
   console.log(board)
 }
 
