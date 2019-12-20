@@ -193,14 +193,14 @@ function neibr() {
 
       if (board[i][j].value == 0) //if the field is not a mine , how many mines are surrounding it
       {
-        if (i - 1 >= 0 && board[i - 1][j].value == 1) count++; //up 
-        if (i + 1 < board.length && board[i + 1][j].value == 1) count++; //down
-        if (j - 1 >= 0 && board[i][j - 1].value == 1) count++; //left
-        if (j + 1 < board.length && board[i][j + 1].value == 1) count++; //right
-        if (i - 1 >= 0 && j - 1 >= 0 && board[i - 1][j - 1].value == 1) count++; //up&left
-        if (i - 1 >= 0 && j + 1 < board.length && board[i - 1][j + 1].value == 1) count++; //up&right
+        if (i - 1 >= 0                                   && board[i - 1][j].value == 1) count++; //up 
+        if (i + 1 < board.length                         && board[i + 1][j].value == 1) count++; //down
+        if (j - 1 >= 0                                   && board[i][j - 1].value == 1) count++; //left
+        if (j + 1 < board.length                         && board[i][j + 1].value == 1) count++; //right
+        if (i - 1 >= 0           && j - 1 >= 0           && board[i - 1][j - 1].value == 1) count++; //up&left
+        if (i - 1 >= 0           && j + 1 < board.length && board[i - 1][j + 1].value == 1) count++; //up&right
         if (i + 1 < board.length && j + 1 < board.length && board[i + 1][j + 1].value == 1) count++; //down&right
-        if (i + 1 < board.length && j - 1 >= 0 && board[i + 1][j - 1].value == 1) count++; //down&left
+        if (i + 1 < board.length && j - 1 >= 0           && board[i + 1][j - 1].value == 1) count++; //down&left
 
       }
       board[i][j].countVal = count;
