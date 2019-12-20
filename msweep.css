@@ -1,0 +1,32 @@
+button {
+  padding: 0px;
+  border: 0px;
+}
+
+#manualR {
+  padding: 10px;
+  margin: auto;
+  display: flex;
+  font-size: 15px;
+}
+
+h1 {
+  text-align: center;
+}
+
+div table {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+body {
+  background-color: #8CA2C9;
+  font-family: "Amatic SC";
+  font-size: 25px;
+}
+
+p {
+  font-size: 30px;
+}
