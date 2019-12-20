@@ -49,7 +49,6 @@ function genGrid() {
 
     var tRows = document.createElement("tr") //creates table rows element
 
-
     for (var x = 0; x < columns; x++) {
       //for each row & column
       var cell = {
@@ -76,28 +75,24 @@ function genGrid() {
       btn.appendChild(imges); //appending button to data
       cell.button = imges; //button is eq. to dom img el.
 
-
       imges.oncontextmenu = function(event) {
         event.preventDefault();
         plantFlag(this.x, this.y)
-
-
       }.bind({
         x: x,
         y: y
       })
 
       imges.onclick = function() {
-        checkCell(this.x, this.y)
-				
+        checkCell(this.x, this.y)			
       }.bind({
         x: x,
         y: y
       })
 
     }
+	  
     msTable.appendChild(tRows); //appending rows to table
-
 
   }
   boardId.appendChild(msTable); //appending table to divEl
@@ -106,8 +101,6 @@ function genGrid() {
   neibr();
   
 }
-
-
 
 
 function updateMinesFlagged() {
@@ -160,7 +153,6 @@ function checkIfmine(x, y) {
 }
 
 
-
 function plantMines() {
   var mPlanted = 0;
 
@@ -176,7 +168,6 @@ function plantMines() {
   }
 }
 /* if its not a mine look for field that is not a mine and plant a mine & increase planted count + 1 */
-//console.log(board)
 
 function neibr() {
 
@@ -225,7 +216,6 @@ function revealNei(x, y) {
 
   if (cell.value == 0 && cell.countVal > 0) {
     revealCell(x, y)
-    
     return;
   }
 
@@ -242,12 +232,7 @@ function revealNei(x, y) {
     revealNei(x + 1, y)
     
   }    
-  
-
-
 }
-
-
 
 function checkCell(x, y) {
   if (!inBounds(x, y))
@@ -258,13 +243,11 @@ function checkCell(x, y) {
     return;
 
   if (cell.value == 0 && cell.countVal > 0) {
-    revealCell(x, y);
-		
+    revealCell(x, y);		
   }
 
   if (cell.value == 0 && cell.countVal == 0) {
     revealNei(x, y)
-    
     return;
   }
   if (cell.value == 1) {
@@ -284,7 +267,6 @@ function traverse() {
       var cell = board[y][x]
       if (cell.value == 1) {
         revealCell(x, y);
-
       }
     }
   }
