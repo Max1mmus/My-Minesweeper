@@ -37,7 +37,7 @@ function getImg(v, cV) {
 
 
 function genGrid() {
-  board = [];
+  
   var boardId = document.getElementById("board")
   var msTable = document.createElement("table")
 
