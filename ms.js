@@ -56,7 +56,7 @@ function genGrid() {
 
         isOpen: false,
         value: 0, // value 1 represents a mine, value 0 is not a mine
-        countVal: null, //neighbours count, 1 represents a mine
+        countVal: null, //neighbours count
         button: null,
         plantedF: false,
         isFlag: false,
@@ -73,8 +73,8 @@ function genGrid() {
 
       tRows.appendChild(tData); // appending data to row
       tData.appendChild(btn); //button to data
-      btn.appendChild(imges); //appending button to data
-      cell.button = imges; //button is eq. to dom img el.
+      btn.appendChild(imges);
+      cell.button = imges; 
 
 
       imges.oncontextmenu = function(event) {
