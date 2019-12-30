@@ -5,7 +5,7 @@ const mineCount = 7;
 var minesFlagged = 0;
 var boardSize = rows * columns - mineCount;
 
-document.getElementById("mLeft").innerHTML = "Mines on board: " + mineCount
+document.getElementById("mLeft").innerHTML = "Mines on board: " + mineCount;
 
 var images = [
   ["https://user-images.githubusercontent.com/56004853/68697439-16d0f580-057f-11ea-8954-f47b9edb0ca9.jpg", //empty
@@ -35,12 +35,12 @@ function getImg(v, cV) {
   return "";
 }
 
-
 function genGrid() {
-  
+
+  board = [];
+
   var boardId = document.getElementById("board")
   var msTable = document.createElement("table")
-
 
   for (var y = 0; y < rows; y++) {
     //for each column we create a row
@@ -56,7 +56,7 @@ function genGrid() {
 
         isOpen: false,
         value: 0, // value 1 represents a mine, value 0 is not a mine
-        countVal: null, //neighbours count
+        countVal: null, //neighbours count, 1 represents a mine
         button: null,
         plantedF: false,
         isFlag: false,
@@ -73,8 +73,8 @@ function genGrid() {
 
       tRows.appendChild(tData); // appending data to row
       tData.appendChild(btn); //button to data
-      btn.appendChild(imges);
-      cell.button = imges; 
+      btn.appendChild(imges); //appending button to data
+      cell.button = imges; //button is eq. to dom img el.
 
 
       imges.oncontextmenu = function(event) {
@@ -98,13 +98,11 @@ function genGrid() {
     }
     msTable.appendChild(tRows); //appending rows to table
 
-
   }
   boardId.appendChild(msTable); //appending table to divEl
 
   plantMines();
   neibr();
-
 }
 
 function winLog(x, y) {
@@ -113,6 +111,7 @@ function winLog(x, y) {
     boardSize--
     console.log(boardSize)
   }
+
   if (boardSize == 0) {
     alert("You won!")
     resetBoard();
@@ -140,24 +139,24 @@ function plantFlag(x, y) {
 
 }
 
-
 function checkIfmine(x, y) {
 
   var cell = board[y][x]
 
   for (var s = 0; s < 1; s++) {
     if (cell.value == 1) {
+
       if (cell.isFlag == true)
         minesFlagged++
       if (cell.isFlag == false)
         minesFlagged--
+
     }
     if (cell.value == 0) {
       return;
     }
 
     console.log(minesFlagged)
-
 
     if (minesFlagged == mineCount) {
       alert("You won !")
@@ -181,7 +180,7 @@ function plantMines() {
   }
 }
 /* if its not a mine look for field that is not a mine and plant a mine & increase planted count + 1 */
-//console.log(board)
+
 
 function neibr() {
 
@@ -226,12 +225,12 @@ function revealNei(x, y) {
     return;
 
   var cell = board[y][x];
+
   if (cell.isOpen)
     return;
 
   if (cell.value == 0 && cell.countVal > 0) {
     revealCell(x, y)
-
     return;
   }
 
@@ -246,11 +245,8 @@ function revealNei(x, y) {
     revealNei(x - 1, y + 1)
     revealNei(x - 1, y)
     revealNei(x + 1, y)
-
   }
-
 }
-
 
 function checkCell(x, y) {
   if (!inBounds(x, y))
@@ -262,14 +258,13 @@ function checkCell(x, y) {
 
   if (cell.value == 0 && cell.countVal > 0) {
     revealCell(x, y);
-
   }
 
   if (cell.value == 0 && cell.countVal == 0) {
     revealNei(x, y)
-
     return;
   }
+
   if (cell.value == 1) {
     cell.button.style = 'background: red; padding: 4px';
     revealCell(x, y);
@@ -293,7 +288,6 @@ function traverse() {
   }
 }
 
-
 function resetBoard() {
 
   var conf = confirm("Reset game?")
@@ -312,7 +306,6 @@ function resetBoard() {
   }
 }
 
-
 function manualReset() {
   var getEl = document.getElementById("board")
 
@@ -322,14 +315,13 @@ function manualReset() {
 
   genGrid();
   minesFlagged = 0;
-
   boardSize = rows * columns - mineCount;
+
   console.log(board)
 }
 
 var elMano = document.getElementById("manualR");
 elMano.onclick = manualReset;
-
 
 genGrid();
 console.log(board)
