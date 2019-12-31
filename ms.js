@@ -27,17 +27,15 @@ function getImg(v, cV) {
     return images[0][cV];
   } else if (v == 0 && cV == 0) {
     console.log(images[0][0])
-    return images[0][0]
+    return images[0][0];
   } else if (v == 1 && cV == 0) {
     console.log(images[1][0])
-    return images[1][0]
+    return images[1][0];
   }
   return "";
 }
 
 function genGrid() {
-
-  board = [];
 
   var boardId = document.getElementById("board")
   var msTable = document.createElement("table")
@@ -56,7 +54,7 @@ function genGrid() {
 
         isOpen: false,
         value: 0, // value 1 represents a mine, value 0 is not a mine
-        countVal: null, //neighbours count, 1 represents a mine
+        countVal: null, //neighbours count
         button: null,
         plantedF: false,
         isFlag: false,
@@ -65,22 +63,21 @@ function genGrid() {
       //we push cell into each row
       row.push(cell);
 
-      var tData = document.createElement("td") // creates cell
-      var btn = document.createElement("button") //creates button element
-      var imges = document.createElement("img") //img el
+      var tData = document.createElement("td");
+      var btn = document.createElement("button"); 
+      var imges = document.createElement("img");
 
       imges.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697433-15073200-057f-11ea-864a-9cb54fe0bfd8.jpg") //closed tile img
 
-      tRows.appendChild(tData); // appending data to row
-      tData.appendChild(btn); //button to data
-      btn.appendChild(imges); //appending button to data
-      cell.button = imges; //button is eq. to dom img el.
+      tRows.appendChild(tData); 
+      tData.appendChild(btn); 
+      btn.appendChild(imges);
+      cell.button = imges; 
 
 
       imges.oncontextmenu = function(event) {
         event.preventDefault();
         plantFlag(this.x, this.y)
-
 
       }.bind({
         x: x,
@@ -96,10 +93,10 @@ function genGrid() {
       })
 
     }
-    msTable.appendChild(tRows); //appending rows to table
+    msTable.appendChild(tRows);
 
   }
-  boardId.appendChild(msTable); //appending table to divEl
+  boardId.appendChild(msTable);
 
   plantMines();
   neibr();
@@ -115,7 +112,6 @@ function winLog(x, y) {
   if (boardSize == 0) {
     alert("You won!")
     resetBoard();
-
   }
 }
 
@@ -210,7 +206,7 @@ function neibr() {
 
 function inBounds(x, y) {
   return x >= 0 && x < columns &&
-    y >= 0 && y < rows
+         y >= 0 && y < rows
 }
 
 function revealCell(x, y) {
