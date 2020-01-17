@@ -23,57 +23,51 @@ var images = [
 
 function getImg(v, cV) {
   if (v == 0 && cV >= 1) {
-    console.log(images[0][cV])
     return images[0][cV];
+
   } else if (v == 0 && cV == 0) {
-    console.log(images[0][0])
     return images[0][0];
+
   } else if (v == 1 && cV == 0) {
-    console.log(images[1][0])
     return images[1][0];
   }
   return "";
 }
 
 function genGrid() {
-
-  var boardId = document.getElementById("board")
-  var msTable = document.createElement("table")
+  board = [];
+  var boardId = document.getElementById("board");
+  var msTable = document.createElement("table");
 
   for (var y = 0; y < rows; y++) {
-    //for each column we create a row
     var row = [];
-    board.push(row)
-
-    var tRows = document.createElement("tr") //creates table rows element
-
+    board.push(row);
+    var tRows = document.createElement("tr");
 
     for (var x = 0; x < columns; x++) {
-      //for each row & column
+  
       var cell = {
 
         isOpen: false,
-        value: 0, // value 1 represents a mine, value 0 is not a mine
+        value: 0,        // value 1 represents a mine, value 0 is not a mine
         countVal: null, //neighbours count
         button: null,
         plantedF: false,
         isFlag: false,
       }
 
-      //we push cell into each row
       row.push(cell);
 
       var tData = document.createElement("td");
-      var btn = document.createElement("button"); 
+      var btn = document.createElement("button");
       var imges = document.createElement("img");
 
-      imges.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697433-15073200-057f-11ea-864a-9cb54fe0bfd8.jpg") //closed tile img
+      imges.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697433-15073200-057f-11ea-864a-9cb54fe0bfd8.jpg"); //closed tile img
 
-      tRows.appendChild(tData); 
-      tData.appendChild(btn); 
+      tRows.appendChild(tData);
+      tData.appendChild(btn);
       btn.appendChild(imges);
-      cell.button = imges; 
-
+      cell.button = imges;
 
       imges.oncontextmenu = function(event) {
         event.preventDefault();
@@ -91,71 +85,62 @@ function genGrid() {
         x: x,
         y: y
       })
-
     }
     msTable.appendChild(tRows);
-
   }
   boardId.appendChild(msTable);
-
   plantMines();
   neibr();
+
 }
 
 function winLog(x, y) {
   var cell = board[y][x]
   if (cell.value == 0 && cell.isOpen == true) {
     boardSize--
-    console.log(boardSize)
+    console.log(boardSize);
   }
-
   if (boardSize == 0) {
-    alert("You won!")
+    alert("You won!");
     resetBoard();
+
   }
 }
 
 function plantFlag(x, y) {
-  var cell = board[y][x]
+  var cell = board[y][x];
   if (cell.isOpen) {
     return;
   }
-
   if (cell.plantedF) {
     cell.button.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697433-15073200-057f-11ea-864a-9cb54fe0bfd8.jpg") //closed tile img
     cell.isFlag = false
-
   } else {
     cell.button.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697436-159fc880-057f-11ea-887f-688e8868c9a3.jpg") //flag tile
     cell.isFlag = true;
-
   }
   cell.plantedF = !cell.plantedF;
   checkIfmine(x, y);
-
 }
 
 function checkIfmine(x, y) {
-
-  var cell = board[y][x]
+  var cell = board[y][x];
 
   for (var s = 0; s < 1; s++) {
     if (cell.value == 1) {
-
       if (cell.isFlag == true)
         minesFlagged++
       if (cell.isFlag == false)
         minesFlagged--
-
     }
     if (cell.value == 0) {
       return;
     }
 
-    console.log(minesFlagged)
+    console.log(minesFlagged);
 
     if (minesFlagged == mineCount) {
-      alert("You won !")
+      alert("You won !");
       resetBoard();
     }
   }
@@ -177,25 +162,23 @@ function plantMines() {
 }
 /* if its not a mine look for field that is not a mine and plant a mine & increase planted count + 1 */
 
-
 function neibr() {
 
   for (var i = 0; i < board.length; i++) {
-
     for (var j = 0; j < board.length; j++) {
 
       var count = 0;
 
       if (board[i][j].value == 0) //if the field is not a mine , how many mines are surrounding it
       {
-        if (i - 1 >= 0                                   && board[i - 1][j].value == 1) count++; //up 
-        if (i + 1 < board.length                         && board[i + 1][j].value == 1) count++; //down
-        if (j - 1 >= 0                                   && board[i][j - 1].value == 1) count++; //left
-        if (j + 1 < board.length                         && board[i][j + 1].value == 1) count++; //right
-        if (i - 1 >= 0           && j - 1 >= 0           && board[i - 1][j - 1].value == 1) count++; //up&left
-        if (i - 1 >= 0           && j + 1 < board.length && board[i - 1][j + 1].value == 1) count++; //up&right
-        if (i + 1 < board.length && j + 1 < board.length && board[i + 1][j + 1].value == 1) count++; //down&right
-        if (i + 1 < board.length && j - 1 >= 0           && board[i + 1][j - 1].value == 1) count++; //down&left
+        if (i - 1 >= 0                                    && board[i - 1][j].value == 1) count++; //up 
+        if (i + 1 < board.length                          && board[i + 1][j].value == 1) count++; //down
+        if (j - 1 >= 0                                    && board[i][j - 1].value == 1) count++; //left
+        if (j + 1 < board.length                          && board[i][j + 1].value == 1) count++; //right
+        if (i - 1 >= 0 && j - 1 >= 0                      && board[i - 1][j - 1].value == 1) count++; //up&left
+        if (i - 1 >= 0 && j + 1 < board.length            && board[i - 1][j + 1].value == 1) count++; //up&right
+        if (i + 1 < board.length && j + 1 < board.length  && board[i + 1][j + 1].value == 1) count++; //down&right
+        if (i + 1 < board.length && j - 1 >= 0            && board[i + 1][j - 1].value == 1) count++; //down&left
 
       }
       board[i][j].countVal = count;
@@ -206,14 +189,14 @@ function neibr() {
 
 function inBounds(x, y) {
   return x >= 0 && x < columns &&
-         y >= 0 && y < rows
+    y >= 0 && y < rows
 }
 
 function revealCell(x, y) {
-  var cell = board[y][x]
+  var cell = board[y][x];
   cell.isOpen = true;
-  cell.button.setAttribute("src", getImg(cell.value, cell.countVal))
-  winLog(x, y)
+  cell.button.setAttribute("src", getImg(cell.value, cell.countVal));
+  winLog(x, y);
 }
 
 function revealNei(x, y) {
@@ -221,7 +204,6 @@ function revealNei(x, y) {
     return;
 
   var cell = board[y][x];
-
   if (cell.isOpen)
     return;
 
@@ -254,31 +236,29 @@ function checkCell(x, y) {
 
   if (cell.value == 0 && cell.countVal > 0) {
     revealCell(x, y);
+
   }
 
   if (cell.value == 0 && cell.countVal == 0) {
     revealNei(x, y)
     return;
   }
-
   if (cell.value == 1) {
     cell.button.style = 'background: red; padding: 4px';
     revealCell(x, y);
     traverse();
     alert("Game Over!");
     resetBoard();
-    minesFlagged = 0
-
+    minesFlagged = 0;
   }
 }
 
 function traverse() {
   for (var y = 0; y < rows; y++) {
     for (var x = 0; x < columns; x++) {
-      var cell = board[y][x]
+      var cell = board[y][x];
       if (cell.value == 1) {
         revealCell(x, y);
-
       }
     }
   }
@@ -286,17 +266,15 @@ function traverse() {
 
 function resetBoard() {
 
-  var conf = confirm("Reset game?")
+  var conf = confirm("Reset game?");
   if (conf === true) {
     var getEl = document.getElementById("board")
     while (getEl.hasChildNodes()) {
       getEl.removeChild(getEl.lastChild)
-
     }
 
     genGrid();
     minesFlagged = 0;
-
     boardSize = rows * columns - mineCount;
     console.log(board);
   }
@@ -308,16 +286,13 @@ function manualReset() {
   while (getEl.hasChildNodes()) {
     getEl.removeChild(getEl.lastChild)
   }
-
   genGrid();
   minesFlagged = 0;
   boardSize = rows * columns - mineCount;
-
-  console.log(board)
+  console.log(board);
 }
 
 var elMano = document.getElementById("manualR");
 elMano.onclick = manualReset;
-
 genGrid();
 console.log(board)
