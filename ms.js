@@ -8,17 +8,17 @@ var boardSize = rows * columns - mineCount;
 document.getElementById("mLeft").innerHTML = "Mines on board: " + mineCount;
 
 var images = [
-  ["https://user-images.githubusercontent.com/56004853/68697439-16d0f580-057f-11ea-8954-f47b9edb0ca9.jpg", //empty
-    "https://user-images.githubusercontent.com/56004853/68697435-159fc880-057f-11ea-8f66-9258fbcc421a.jpg", //1
-    "https://user-images.githubusercontent.com/56004853/68697441-16d0f580-057f-11ea-8be9-1768e3e616bc.jpg", //2
-    "https://user-images.githubusercontent.com/56004853/68697442-16d0f580-057f-11ea-88c2-dd4f2b4065d5.jpg", //3
-    "https://user-images.githubusercontent.com/56004853/68697443-16d0f580-057f-11ea-9ae4-c5b84ad30fa4.jpg", //4
-    "https://user-images.githubusercontent.com/56004853/68697446-17698c00-057f-11ea-94f4-8618237a8f8e.jpg", //5
-    "https://user-images.githubusercontent.com/56004853/68697448-18022280-057f-11ea-8421-fac10e7e7b2a.jpg", //6
-    "https://user-images.githubusercontent.com/56004853/68697447-17698c00-057f-11ea-9d0e-9f0b85f7fc21.jpg", //7
-    "https://user-images.githubusercontent.com/56004853/68697434-15073200-057f-11ea-9565-cd8daa5b2101.jpg" //8
+  ["icons/blank.jpg",
+    "icons/num1.jpg",
+    "icons/num2.jpg",
+    "icons/num3.jpg",
+    "icons/num4.jpg",
+    "icons/num5.jpg",
+    "icons/num6.jpg",
+    "icons/num7.jpg",
+    "icons/num8.jpg"
   ],
-  ["https://user-images.githubusercontent.com/56004853/68697437-159fc880-057f-11ea-93c3-fec5bbb29385.jpg"] //mineImg
+  ["icons/mine.jpg"]
 ];
 
 function getImg(v, cV) {
@@ -62,7 +62,7 @@ function genGrid() {
       var btn = document.createElement("button");
       var imges = document.createElement("img");
 
-      imges.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697433-15073200-057f-11ea-864a-9cb54fe0bfd8.jpg"); //closed tile img
+      imges.setAttribute("src", "icons/closed.jpg");
 
       tRows.appendChild(tData);
       tData.appendChild(btn);
@@ -113,10 +113,10 @@ function plantFlag(x, y) {
     return;
   }
   if (cell.plantedF) {
-    cell.button.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697433-15073200-057f-11ea-864a-9cb54fe0bfd8.jpg") //closed tile img
+    cell.button.setAttribute("src", "icons/blank.jpg") //closed tile img
     cell.isFlag = false
   } else {
-    cell.button.setAttribute("src", "https://user-images.githubusercontent.com/56004853/68697436-159fc880-057f-11ea-887f-688e8868c9a3.jpg") //flag tile
+    cell.button.setAttribute("src", "icons/flag.jpg") //flag tile
     cell.isFlag = true;
   }
   cell.plantedF = !cell.plantedF;
