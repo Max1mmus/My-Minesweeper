@@ -1,5 +1,5 @@
-var rows = 5;
-var columns = 5;
+let rows = 5;
+let columns = 5;
 var board = [];
 const mineCount = 7;
 var minesFlagged = 0;
