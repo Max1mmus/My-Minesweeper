@@ -236,7 +236,6 @@ function checkCell(x, y) {
 
   if (cell.value == 0 && cell.countVal > 0) {
     revealCell(x, y);
-
   }
 
   if (cell.value == 0 && cell.countVal == 0) {
@@ -244,7 +243,7 @@ function checkCell(x, y) {
     return;
   }
   if (cell.value == 1) {
-    cell.button.style = 'background: red; padding: 4px';
+    cell.button.style = 'background: red; padding: 3px';
     revealCell(x, y);
     traverse();
     alert("Game Over!");
