@@ -1,25 +1,24 @@
 {
   "name": "my-minesweeper",
   "version": "1.0.0",
-  "description": "My Msweeper",
-  "main": "ms.js",
-  "devDependencies": {
-    "concurrently": "^5.1.0",
-    "http-server": "^0.12.3",
-    "jshint": "^2.11.0",
-    "lodash": "^4.17.19"
-  },
+  "description": "Minesweeper game",
+  "main": "index.js",
   "scripts": {
-    "open": "concurrently \"http-server -a localhost -c-1 -p 1234\""
+    "open": "http-server -a localhost -c-1 -p 8080"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Max1mmus/My-Minesweeper.git"
   },
-  "author": "",
+  "author": "Max1mmus",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Max1mmus/My-Minesweeper/issues"
   },
-  "homepage": "https://github.com/Max1mmus/My-Minesweeper#readme"
+  "homepage": "https://github.com/Max1mmus/My-Minesweeper#readme",
+  "dependencies": {
+    "http": "0.0.1-security",
+    "http-server": "^0.12.3",
+    "server": "^1.0.31"
+  }
 }
