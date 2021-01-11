@@ -17,8 +17,6 @@
   },
   "homepage": "https://github.com/Max1mmus/My-Minesweeper#readme",
   "dependencies": {
-    "http": "0.0.1-security",
-    "http-server": "^0.12.3",
-    "server": "^1.0.31"
+    "http-server": "^0.12.3"
   }
 }
