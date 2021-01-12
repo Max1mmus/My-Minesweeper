@@ -1,5 +1,6 @@
 td {
-  padding: 2px;
+  overflow: clip;
+  max-width: 50px;
 }
 
 button {
