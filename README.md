@@ -12,5 +12,6 @@ My first minesweeper game
  * CSS
  * HTML
 
-Visual layout of the game  
-![MsLayout](icons/gameLayout.jpg)
+Visual layout of the game
+
+<img src="icons/gameLayout.jpg" width="600px">
