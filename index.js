@@ -111,7 +111,7 @@ function plantFlag (x, y) {
         return;
     }
     if (cell.plantedF) {
-        cell.button.setAttribute("src", "icons/blank.jpg"); // closed tile img
+        cell.button.setAttribute("src", "icons/closed.jpg"); // closed tile img
         cell.isFlag = false;
     } else {
         cell.button.setAttribute("src", "icons/flag.jpg"); // flag tile
@@ -232,7 +232,7 @@ function checkCell (x, y) {
         return;
     }
     if (cell.value === 1) {
-        cell.button.style = "background: red; padding: 3px";
+        cell.button.style = "background: red; padding: 2px; width: 48px";
         revealCell(x, y);
         traverse();
         alert("Game Over!");
