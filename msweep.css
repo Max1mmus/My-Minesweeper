@@ -1,3 +1,22 @@
+body {
+  background-color: #8CA2C9;
+  font-family: "Amatic SC";
+  font-size: 25px;
+}
+
+header {
+  text-align: center;
+}
+
+p {
+  font-size: 30px;
+}
+
+div table {
+  margin: auto;
+  border-spacing: 2px;
+}
+
 td {
   overflow: clip;
   max-width: 50px;
@@ -14,23 +33,4 @@ button {
   display: flex;
   font-size: 15px;
   margin-top: 10px;
-}
-
-h1 {
-  text-align: center;
-}
-
-div table {
-margin: auto;
-border-spacing: 2px;
-}
-
-body {
-  background-color: #8CA2C9;
-  font-family: "Amatic SC";
-  font-size: 25px;
-}
-
-p {
-  font-size: 30px;
 }
