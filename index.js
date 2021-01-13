@@ -89,7 +89,6 @@ function genGrid () {
     boardId.appendChild(msTable);
     plantMines();
     neibr();
-
 }
 
 function winLog (x, y) {
@@ -101,7 +100,6 @@ function winLog (x, y) {
     if (boardSize === 0) {
         alert("You won!");
         resetBoard();
-
     }
 }
 
@@ -123,16 +121,16 @@ function plantFlag (x, y) {
 
 function checkIfmine (x, y) {
     const cell = board[y][x];
-
     for (let s = 0; s < 1; s++) {
+
         if (cell.value === 1) {
             if (cell.isFlag === true) minesFlagged++;
             if (cell.isFlag === false) minesFlagged--;
         }
+
         if (cell.value === 0) {
             return;
         }
-
         console.log(minesFlagged);
 
         if (minesFlagged === mineCount) {
@@ -146,17 +144,15 @@ function plantMines () {
     let mPlanted = 0;
 
     while (mPlanted < mineCount) {
-        let x = Math.floor(Math.random() * 5);
-        let y = Math.floor(Math.random() * 5);
-        // console.log(x + " x " + y)
-        if (board[y][x].value !== 1) {
+        const x = Math.floor(Math.random() * 5);
+        const y = Math.floor(Math.random() * 5);
 
+        if (board[y][x].value !== 1) {
             board[y][x].value = 1;
             mPlanted++;
         }
     }
 }
-// if its not a mine look for field that is not a mine and plant a mine & increase planted count + 1
 
 function neibr () {
     for (let i = 0; i < board.length; i++) {
