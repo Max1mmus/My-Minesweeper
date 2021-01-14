@@ -77,7 +77,7 @@ function genGrid () {
 
 function winLog (x, y) {
     const cell = board[y][x];
-    if (cell.value === 0 && cell.isOpen === true) {
+    if (cell.value >= 0 && cell.isOpen === true) {
         boardSize--;
         console.log(boardSize);
     }
@@ -107,12 +107,12 @@ function checkIfmine (x, y) {
     const cell = board[y][x];
     for (let s = 0; s < 1; s++) {
 
-        if (cell.value === 1) {
+        if (cell.value === -1) {
             if (cell.isFlag === true) minesFlagged++;
             if (cell.isFlag === false) minesFlagged--;
         }
 
-        if (cell.value === 0) {
+        if (cell.value >= 0) {
             return;
         }
         console.log(minesFlagged);
@@ -131,8 +131,8 @@ function plantMines () {
         const x = Math.floor(Math.random() * 5);
         const y = Math.floor(Math.random() * 5);
 
-        if (board[y][x].value !== 1) {
-            board[y][x].value = 1;
+        if (board[y][x].value !== -1) {
+            board[y][x].value = -1;
             mPlanted++;
         }
     }
@@ -178,12 +178,12 @@ function revealNei (x, y) {
 
     if (cell.isOpen) return;
 
-    if (cell.value === 0 && cell.countVal > 0) {
+    if (cell.value > 0) {
         revealCell(x, y);
         return;
     }
 
-    if (cell.value === 0 && cell.countVal === 0) {
+    if (cell.value === 0) {
         revealCell(x, y);
 
         revealNei(x, y + 1);
@@ -203,15 +203,15 @@ function checkCell (x, y) {
     const cell = board[y][x];
     if (cell.isOpen) return;
 
-    if (cell.value === 0 && cell.countVal > 0) {
+    if (cell.value > 0) {
         revealCell(x, y);
     }
 
-    if (cell.value === 0 && cell.countVal === 0) {
+    if (cell.value === 0) {
         revealNei(x, y);
         return;
     }
-    if (cell.value === 1) {
+    if (cell.value === -1) {
         cell.button.style = "background: red; padding: 2px; width: 48px";
         revealCell(x, y);
         traverse();
@@ -225,7 +225,7 @@ function traverse () {
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < columns; x++) {
             const cell = board[y][x];
-            if (cell.value === 1) {
+            if (cell.value === -1) {
                 revealCell(x, y);
             }
         }
@@ -233,7 +233,6 @@ function traverse () {
 }
 
 function resetBoard () {
-
     const conf = confirm("Reset game?");
     if (conf === true) {
         const getEl = document.getElementById("board");
