@@ -167,7 +167,7 @@ function inBounds (x, y) {
 function revealCell (x, y) {
     const cell = board[y][x];
     cell.isOpen = true;
-    cell.button.setAttribute("src", getImg(cell.value, cell.countVal));
+    cell.button.setAttribute("src", images.get(cell.value));
     winLog(x, y);
 }
 
