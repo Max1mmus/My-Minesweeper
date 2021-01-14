@@ -49,8 +49,7 @@ function genGrid () {
 
             const cell = {
                 isOpen: false,
-                value: 0,        // value 1 represents a mine, value 0 is not a mine
-                countVal: null, // neighbours count
+                value: null,        // value -1 represents a mine
                 button: null,
                 plantedF: false,
                 isFlag: false
