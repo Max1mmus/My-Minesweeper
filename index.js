@@ -164,8 +164,43 @@ function inBounds (x, y) {
     return x >= 0 && x < columns && y >= 0 && y < rows;
 }
 
+function plantFlag (x, y) {
+    const cell = board[y][x];
+
+    if (cell.isOpen) return;
+
+    if (cell.plantedF) {
+        cell.button.setAttribute("src", "icons/closed.jpg"); // closed tile img
+        cell.isFlag = false;
+    } else {
+        cell.button.setAttribute("src", "icons/flag.jpg"); // flag tile
+        cell.isFlag = true;
+    }
+    cell.plantedF = !cell.plantedF;
+    checkIfmine(x, y);
+}
+
+function checkIfmine (x, y) {
+    const cell = board[y][x];
+
+    if (cell.value === -1) {
+        if (cell.isFlag === true) minesFlagged++;
+        if (cell.isFlag === false) minesFlagged--;
+    }
+    if (cell.value >= 0) {
+        if (cell.isFlag === true) flaggedNonMine++;
+        if (cell.isFlag === false) flaggedNonMine--;
+    }
+    if (minesFlagged === mineCount && flaggedNonMine === 0) {
+        alert("You won !");
+        resetBoard();
+    }
+}
+
+
 function revealCell (x, y) {
     const cell = board[y][x];
+
     cell.isOpen = true;
     cell.button.setAttribute("src", images.get(cell.value));
     winLog(x, y);
@@ -201,6 +236,7 @@ function checkCell (x, y) {
     if (!inBounds(x, y)) return;
 
     const cell = board[y][x];
+
     if (cell.isOpen) return;
 
     if (cell.value > 0) {
@@ -214,34 +250,52 @@ function checkCell (x, y) {
     if (cell.value === -1) {
         cell.button.style = "background: red; padding: 2px; width: 48px";
         revealCell(x, y);
-        traverse();
+        traverse(function (x, y, cell) {
+            if (cell.value === -1) revealCell(x, y);
+        });
         alert("Game Over!");
         resetBoard();
         minesFlagged = 0;
     }
 }
 
-function traverse () {
+function traverse (callBackF) {
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < columns; x++) {
             const cell = board[y][x];
-            if (cell.value === -1) {
-                revealCell(x, y);
-            }
+
+            callBackF(x, y, cell);
         }
+    }
+}
+
+function winLog (x, y) {
+    const cell = board[y][x];
+
+    if (cell.value >= 0 && cell.isOpen === true) {
+        boardSize--;
+        console.log(boardSize);
+    }
+
+    if (boardSize === 0) {
+        alert("You won!");
+        resetBoard();
     }
 }
 
 function resetBoard () {
     const conf = confirm("Reset game?");
+
     if (conf === true) {
         const getEl = document.getElementById("board");
+
         while (getEl.hasChildNodes()) {
             getEl.removeChild(getEl.lastChild);
         }
 
         genGrid();
         minesFlagged = 0;
+        flaggedNonMine = 0;
         boardSize = rows * columns - mineCount;
         console.log(board);
     }
@@ -255,11 +309,13 @@ function manualReset () {
     }
     genGrid();
     minesFlagged = 0;
+    flaggedNonMine = 0;
     boardSize = rows * columns - mineCount;
     console.log(board);
 }
 
 const elMano = document.getElementById("manualR");
+
 elMano.onclick = manualReset;
 genGrid();
 console.log(board);
