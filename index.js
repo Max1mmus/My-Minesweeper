@@ -7,20 +7,18 @@ let boardSize = rows * columns - mineCount;
 
 document.getElementById("mLeft").innerHTML = `Mines on board: ${mineCount}`;
 
-const images = [
-    [
-        "icons/blank.jpg",
-        "icons/num1.jpg",
-        "icons/num2.jpg",
-        "icons/num3.jpg",
-        "icons/num4.jpg",
-        "icons/num5.jpg",
-        "icons/num6.jpg",
-        "icons/num7.jpg",
-        "icons/num8.jpg"
-    ],
-    ["icons/mine.jpg"]
-];
+const images = new Map([
+    [-1, "icons/mine.jpg"],
+    [0, "icons/blank.jpg"],
+    [1, "icons/num1.jpg"],
+    [2, "icons/num2.jpg"],
+    [3, "icons/num3.jpg"],
+    [4, "icons/num4.jpg"],
+    [5, "icons/num5.jpg"],
+    [6, "icons/num6.jpg"],
+    [7, "icons/num7.jpg"],
+    [8, "icons/num8.jpg"]
+]);
 
 function getImg (v, cV) {
     if (v === 0 && cV >= 1) {
