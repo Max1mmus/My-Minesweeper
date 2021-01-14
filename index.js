@@ -20,19 +20,6 @@ const images = new Map([
     [8, "icons/num8.jpg"]
 ]);
 
-function getImg (v, cV) {
-    if (v === 0 && cV >= 1) {
-        return images[0][cV];
-
-    } else if (v === 0 && cV === 0) {
-        return images[0][0];
-
-    } else if (v === 1 && cV === 0) {
-        return images[1][0];
-    }
-    return "";
-}
-
 function genGrid () {
     board = [];
     const boardId = document.getElementById("board");
