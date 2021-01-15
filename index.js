@@ -3,6 +3,7 @@ const columns = 5;
 let board = [];
 const mineCount = 7;
 let minesFlagged = 0;
+let flaggedNonMine = 0;
 let boardSize = rows * columns - mineCount;
 
 document.getElementById("mLeft").innerHTML = `Mines on board: ${mineCount}`;
@@ -27,6 +28,7 @@ function genGrid () {
 
     for (let y = 0; y < rows; y++) {
         const row = [];
+
         board.push(row);
         const tRows = document.createElement("tr");
 
@@ -34,7 +36,7 @@ function genGrid () {
 
             const cell = {
                 isOpen: false,
-                value: null,        // value -1 represents a mine
+                value: null, // Value -1 represents a mine
                 button: null,
                 plantedF: false,
                 isFlag: false
@@ -72,26 +74,8 @@ function genGrid () {
     }
     boardId.appendChild(msTable);
     plantMines();
-    neibr();
+    checkNeighbour();
 }
-
-function winLog (x, y) {
-    const cell = board[y][x];
-    if (cell.value >= 0 && cell.isOpen === true) {
-        boardSize--;
-        console.log(boardSize);
-    }
-    if (boardSize === 0) {
-        alert("You won!");
-        resetBoard();
-    }
-}
-
-function plantFlag (x, y) {
-    const cell = board[y][x];
-    if (cell.isOpen) {
-        return;
-    }
     if (cell.plantedF) {
         cell.button.setAttribute("src", "icons/closed.jpg"); // closed tile img
         cell.isFlag = false;
@@ -138,7 +122,7 @@ function plantMines () {
     }
 }
 
-function neibr () {
+function checkNeighbour () {
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board.length; j++) {
             let count = 0;
@@ -184,12 +168,10 @@ function checkIfmine (x, y) {
     const cell = board[y][x];
 
     if (cell.value === -1) {
-        if (cell.isFlag === true) minesFlagged++;
-        if (cell.isFlag === false) minesFlagged--;
+        cell.isFlag === true ? minesFlagged++ : minesFlagged--;
     }
     if (cell.value >= 0) {
-        if (cell.isFlag === true) flaggedNonMine++;
-        if (cell.isFlag === false) flaggedNonMine--;
+        cell.isFlag === true ? flaggedNonMine++ : flaggedNonMine--;
     }
     if (minesFlagged === mineCount && flaggedNonMine === 0) {
         alert("You won !");
