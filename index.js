@@ -76,37 +76,6 @@ function genGrid () {
     plantMines();
     checkNeighbour();
 }
-    if (cell.plantedF) {
-        cell.button.setAttribute("src", "icons/closed.jpg"); // closed tile img
-        cell.isFlag = false;
-    } else {
-        cell.button.setAttribute("src", "icons/flag.jpg"); // flag tile
-        cell.isFlag = true;
-    }
-    cell.plantedF = !cell.plantedF;
-    checkIfmine(x, y);
-}
-
-function checkIfmine (x, y) {
-    const cell = board[y][x];
-    for (let s = 0; s < 1; s++) {
-
-        if (cell.value === -1) {
-            if (cell.isFlag === true) minesFlagged++;
-            if (cell.isFlag === false) minesFlagged--;
-        }
-
-        if (cell.value >= 0) {
-            return;
-        }
-        console.log(minesFlagged);
-
-        if (minesFlagged === mineCount) {
-            alert("You won !");
-            resetBoard();
-        }
-    }
-}
 
 function plantMines () {
     let mPlanted = 0;
@@ -138,8 +107,6 @@ function checkNeighbour () {
                 if (i + 1 < board.length && j - 1 >= 0            && board[i + 1][j - 1].value === -1) count++; // down&left
                 board[i][j].value = count;
             }
-            board[i][j].countVal = count;
-            // console.log(count)
         }
     }
 }
@@ -161,10 +128,10 @@ function plantFlag (x, y) {
         cell.isFlag = true;
     }
     cell.plantedF = !cell.plantedF;
-    checkIfmine(x, y);
+    checkIfMine(x, y);
 }
 
-function checkIfmine (x, y) {
+function checkIfMine (x, y) {
     const cell = board[y][x];
 
     if (cell.value === -1) {
@@ -221,9 +188,7 @@ function checkCell (x, y) {
 
     if (cell.isOpen) return;
 
-    if (cell.value > 0) {
-        revealCell(x, y);
-    }
+    if (cell.value > 0) revealCell(x, y);
 
     if (cell.value === 0) {
         revealNei(x, y);
