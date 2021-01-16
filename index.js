@@ -49,7 +49,6 @@ function genGrid () {
             const imges = document.createElement("img");
 
             imges.setAttribute("src", "icons/closed.jpg");
-
             tRows.appendChild(tData);
             tData.appendChild(btn);
             btn.appendChild(imges);
@@ -74,7 +73,9 @@ function genGrid () {
     }
     boardId.appendChild(msTable);
     plantMines();
-    checkNeighbour();
+    traverse(function (x, y, cell) {
+        if (cell.value !== -1) cell.value = countAroundMines(x, y);
+    });
 }
 
 function plantMines () {
