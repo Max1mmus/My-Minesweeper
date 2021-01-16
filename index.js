@@ -206,6 +206,13 @@ function checkCell (x, y) {
     }
 }
 
+function getCellValue (x, y) {
+    if (!inBounds(x, y)) return "";
+    const cell = board[y][x];
+
+    return cell.value;
+}
+
 function traverse (callBackF) {
     for (let y = 0; y < rows; y++) {
         for (let x = 0; x < columns; x++) {
