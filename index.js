@@ -158,7 +158,6 @@ function revealNei (x, y) {
     const cell = board[y][x];
 
     if (cell.isOpen) return;
-
     if (cell.value > 0) {
         revealCell(x, y);
         return;
@@ -183,9 +182,7 @@ function checkCell (x, y) {
     const cell = board[y][x];
 
     if (cell.isOpen) return;
-
     if (cell.value > 0) revealCell(x, y);
-
     if (cell.value === 0) {
         revealNei(x, y);
         return;
@@ -226,7 +223,6 @@ function winLog (x, y) {
         boardSize--;
         console.log(boardSize);
     }
-
     if (boardSize === 0) {
         alert("You won!");
         resetBoard();
