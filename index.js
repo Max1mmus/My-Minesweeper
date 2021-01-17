@@ -154,7 +154,13 @@ function revealCell (x, y) {
 
     cell.isOpen = true;
     cell.button.setAttribute("src", images.get(cell.value));
-    winLog(x, y);
+
+    if (cell.value >= 0 && cell.isOpen === true) {
+        boardSize--;
+        console.log(boardSize);
+    }
+    console.log(boardSize);
+    winLog();
 }
 
 function revealNei (x, y) {
