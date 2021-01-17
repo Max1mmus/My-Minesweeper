@@ -200,13 +200,13 @@ function checkCell (x, y) {
     }
     if (cell.value === -1) {
         cell.button.style = "background: red; padding: 2px; width: 48px";
+        endContent.textContent = "You died !";
         revealCell(x, y);
         traverse(function (x, y, cell) {
             if (cell.value === -1) revealCell(x, y);
         });
-        alert("Game Over!");
-        resetBoard();
-        minesFlagged = 0;
+        endContent.style = "background: red;";
+        handleEnd();
     }
 }
 
