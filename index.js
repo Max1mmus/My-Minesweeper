@@ -227,13 +227,7 @@ function traverse (callBackF) {
     }
 }
 
-function winLog (x, y) {
-    const cell = board[y][x];
-
-    if (cell.value >= 0 && cell.isOpen === true) {
-        boardSize--;
-        console.log(boardSize);
-    }
+function winLog () {
     if (boardSize === 0) {
         alert("You won!");
         resetBoard();
