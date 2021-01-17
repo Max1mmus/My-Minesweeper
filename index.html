@@ -11,8 +11,19 @@
       <h1>Minesweeper</h1>
       <p id="mLeft"></p>
     </header>
-    <div id="board"> </div>
-    <button id="manualR">New Game !</button>
+
+    <!--- Board wrapper --->
+    <div class="board-wrapper">
+      <div id="board"></div>
+      <button id="new-game-btn">New Game !</button>
+    </div>
+
+    <!--- Game end overlay --->
+    <div class="game-end-overlay">
+      <div class="game-end-wrapper">
+        <p class="end-content"></p>
+      </div>
+    </div>
     <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
