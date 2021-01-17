@@ -234,23 +234,10 @@ function winLog () {
     }
 }
 
-function resetBoard () {
-    const conf = confirm("Reset game?");
-
-    if (conf === true) {
-        const getEl = document.getElementById("board");
-
-        while (getEl.hasChildNodes()) {
-            getEl.removeChild(getEl.lastChild);
-        }
-
-        genGrid();
-        minesFlagged = 0;
-        flaggedNonMine = 0;
-        boardSize = rows * columns - mineCount;
-        console.log(board);
-    }
+function handleEnd () {
+    gameEndOverlay.style.display = "flex";
 }
+
 
 function manualReset () {
     const getEl = document.getElementById("board");
