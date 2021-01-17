@@ -58,15 +58,15 @@ function genGrid () {
                 event.preventDefault();
                 plantFlag(this.x, this.y);
             }.bind({
-                x: x,
-                y: y
+                x,
+                y
             });
 
             imges.onclick = function () {
                 checkCell(this.x, this.y);
             }.bind({
-                x: x,
-                y: y
+                x,
+                y
             });
         }
         msTable.appendChild(tRows);
