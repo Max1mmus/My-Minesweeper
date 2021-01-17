@@ -4,12 +4,13 @@ let board = [];
 const mineCount = 7;
 let boardSize = rows * columns - mineCount;
 
+const minesOnBoard = document.getElementById("mines-on-board");
 const gameEndOverlay = document.querySelector("div.game-end-overlay");
 const endContent = document.querySelector("p.end-content");
 const newGameBtnBtn = document.getElementById("new-game-btn");
 
 newGameBtnBtn.onclick = resetGame;
-document.getElementById("mLeft").innerHTML = `Mines on board: ${mineCount}`;
+minesOnBoard.textContent = `Mines on board: ${mineCount}`;
 
 const images = new Map([
     [-1, "icons/mine.jpg"],
@@ -180,6 +181,7 @@ function checkCell (x, y) {
     }
     if (cell.value === -1) {
         cell.button.style = "background: red; padding: 2px; width: 48px";
+        minesOnBoard.style.visibility = "hidden";
         endContent.textContent = "You died !";
         revealCell(x, y);
         traverse(function (x, y, cell) {
@@ -209,6 +211,7 @@ function traverse (callBackF) {
 
 function winLog () {
     if (boardSize === 0) {
+        minesOnBoard.style.visibility = "hidden";
         endContent.textContent = "You won! 😎";
         endContent.style.background = "gold";
         handleEnd();
@@ -221,7 +224,7 @@ function handleEnd () {
 
 function resetGame () {
     const getEl = document.getElementById("board");
-
+    minesOnBoard.style.visibility = "visible";
     gameEndOverlay.style.display = "none";
 
     while (getEl.hasChildNodes()) {
