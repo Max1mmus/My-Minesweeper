@@ -248,8 +248,6 @@ function resetGame () {
         getEl.removeChild(getEl.lastChild);
     }
     genGrid();
-    minesFlagged = 0;
-    flaggedNonMine = 0;
     boardSize = rows * columns - mineCount;
     console.log(board);
 }
