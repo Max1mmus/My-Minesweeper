@@ -21,4 +21,4 @@ Live version : [Minesweeper](https://max1mmus.github.io/My-Minesweeper/)
  * CSS
  * HTML
 
-Special thanks to @dejanpaca for giving me some pointers (this was my first project ever)
+###### Special thanks to @dejanpaca for giving me some pointers (this was my first project ever)
