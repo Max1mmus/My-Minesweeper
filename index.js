@@ -130,24 +130,7 @@ function plantFlag (x, y) {
         cell.isFlag = true;
     }
     cell.plantedF = !cell.plantedF;
-    checkIfMine(x, y);
 }
-
-function checkIfMine (x, y) {
-    const cell = board[y][x];
-
-    if (cell.value === -1) {
-        cell.isFlag === true ? minesFlagged++ : minesFlagged--;
-    }
-    if (cell.value >= 0) {
-        cell.isFlag === true ? flaggedNonMine++ : flaggedNonMine--;
-    }
-    if (minesFlagged === mineCount && flaggedNonMine === 0) {
-        alert("You won !");
-        resetBoard();
-    }
-}
-
 
 function revealCell (x, y) {
     const cell = board[y][x];
