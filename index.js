@@ -239,8 +239,10 @@ function handleEnd () {
 }
 
 
-function manualReset () {
+function resetGame () {
     const getEl = document.getElementById("board");
+
+    gameEndOverlay.style.display = "none";
 
     while (getEl.hasChildNodes()) {
         getEl.removeChild(getEl.lastChild);
