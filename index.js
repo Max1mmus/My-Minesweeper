@@ -2,8 +2,6 @@ const rows = 5;
 const columns = 5;
 let board = [];
 const mineCount = 7;
-let minesFlagged = 0;
-let flaggedNonMine = 0;
 let boardSize = rows * columns - mineCount;
 
 const gameEndOverlay = document.querySelector("div.game-end-overlay");
