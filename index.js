@@ -138,7 +138,6 @@ function revealCell (x, y) {
 
     if (cell.value >= 0 && cell.isOpen === true) {
         boardSize--;
-        console.log(boardSize);
     }
     console.log(boardSize);
     winLog();
@@ -219,7 +218,6 @@ function winLog () {
 function handleEnd () {
     gameEndOverlay.style.display = "flex";
 }
-
 
 function resetGame () {
     const getEl = document.getElementById("board");
