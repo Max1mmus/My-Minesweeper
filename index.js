@@ -229,8 +229,9 @@ function traverse (callBackF) {
 
 function winLog () {
     if (boardSize === 0) {
-        alert("You won!");
-        resetBoard();
+        endContent.textContent = "You won! 😎";
+        endContent.style.background = "gold";
+        handleEnd();
     }
 }
 
@@ -252,8 +253,5 @@ function resetGame () {
     console.log(board);
 }
 
-const elMano = document.getElementById("manualR");
-
-elMano.onclick = manualReset;
 genGrid();
 console.log(board);
