@@ -6,6 +6,11 @@ let minesFlagged = 0;
 let flaggedNonMine = 0;
 let boardSize = rows * columns - mineCount;
 
+const gameEndOverlay = document.querySelector("div.game-end-overlay");
+const endContent = document.querySelector("p.end-content");
+const newGameBtnBtn = document.getElementById("new-game-btn");
+
+newGameBtnBtn.onclick = resetGame;
 document.getElementById("mLeft").innerHTML = `Mines on board: ${mineCount}`;
 
 const images = new Map([
