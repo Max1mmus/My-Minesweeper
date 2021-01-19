@@ -42,8 +42,7 @@ function genGrid () {
                 isOpen: false,
                 value: null, // Value -1 represents a mine
                 button: null,
-                plantedF: false,
-                isFlag: false
+                plantedF: false
             };
 
             row.push(cell);
@@ -120,15 +119,8 @@ function plantFlag (x, y) {
     const cell = board[y][x];
 
     if (cell.isOpen) return;
-
-    if (cell.plantedF) {
-        cell.button.setAttribute("src", "icons/closed.jpg"); // closed tile img
-        cell.isFlag = false;
-    } else {
-        cell.button.setAttribute("src", "icons/flag.jpg"); // flag tile
-        cell.isFlag = true;
-    }
     cell.plantedF = !cell.plantedF;
+    cell.plantedF ? cell.button.setAttribute("src", "icons/flag.jpg") : cell.button.setAttribute("src", "icons/closed.jpg");
 }
 
 function revealCell (x, y) {
