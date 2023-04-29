@@ -1,7 +1,7 @@
 const rows = 5;
 const columns = 5;
-let board = [];
 const mineCount = 7;
+let board = [];
 let boardSize = rows * columns - mineCount;
 
 const minesOnBoard = document.getElementById("mines-on-board");
@@ -48,16 +48,15 @@ function genGrid () {
             row.push(cell);
 
             const tData = document.createElement("td");
-            const btn = document.createElement("button");
-            const imges = document.createElement("img");
+            const cellImg = document.createElement("img");
 
-            imges.setAttribute("src", "icons/closed.jpg");
+            cellImg.classList.add("cell-img");
+            cellImg.classList.add("closed-cell");
             tRows.appendChild(tData);
-            tData.appendChild(btn);
-            btn.appendChild(imges);
-            cell.button = imges;
+            tData.appendChild(cellImg);
+            cell.button = cellImg;
 
-            imges.oncontextmenu = function (event) {
+            cellImg.oncontextmenu = function (event) {
                 event.preventDefault();
                 plantFlag(this.x, this.y);
             }.bind({
@@ -65,7 +64,7 @@ function genGrid () {
                 y
             });
 
-            imges.onclick = function () {
+            cellImg.onclick = function () {
                 checkCell(this.x, this.y);
             }.bind({
                 x,
@@ -95,7 +94,6 @@ function plantMines () {
     }
 }
 
-// Counts how many mines are around the cell
 function countAroundMines (x, y) {
     let count = 0;
 
@@ -120,13 +118,15 @@ function plantFlag (x, y) {
 
     if (cell.isOpen) return;
     cell.plantedF = !cell.plantedF;
-    cell.plantedF ? cell.button.setAttribute("src", "icons/flag.jpg") : cell.button.setAttribute("src", "icons/closed.jpg");
+    cell.plantedF ? cell.button.setAttribute("src", "icons/flag.png") : cell.button.removeAttribute("src");
 }
 
 function revealCell (x, y) {
     const cell = board[y][x];
 
     cell.isOpen = true;
+    cell.button.classList.add("open-cell");
+    cell.button.classList.remove("closed-cell");
     cell.button.setAttribute("src", images.get(cell.value));
 
     if (cell.value >= 0 && cell.isOpen === true) {
@@ -172,7 +172,7 @@ function checkCell (x, y) {
         return;
     }
     if (cell.value === -1) {
-        cell.button.style = "background: red; padding: 2px; width: 48px";
+        cell.button.style = "background: red;";
         minesOnBoard.style.visibility = "hidden";
         endContent.textContent = "You died !";
         revealCell(x, y);
