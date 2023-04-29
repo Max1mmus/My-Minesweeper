@@ -8,7 +8,7 @@ Live version : [Minesweeper](https://max1mmus.github.io/My-Minesweeper/)
 
 ### Visual layout of the game
 
-<img src="icons/gameLayout.jpg" width="800px">
+<img src="icons/new_visual_id.jpg" width="800px">
 
 ### After you clone repo :
 
