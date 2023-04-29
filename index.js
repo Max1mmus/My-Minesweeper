@@ -13,16 +13,16 @@ newGameBtnBtn.onclick = resetGame;
 minesOnBoard.textContent = `Mines on board: ${mineCount}`;
 
 const images = new Map([
-    [-1, "icons/mine.jpg"],
-    [0, "icons/blank.jpg"],
-    [1, "icons/num1.jpg"],
-    [2, "icons/num2.jpg"],
-    [3, "icons/num3.jpg"],
-    [4, "icons/num4.jpg"],
-    [5, "icons/num5.jpg"],
-    [6, "icons/num6.jpg"],
-    [7, "icons/num7.jpg"],
-    [8, "icons/num8.jpg"]
+    [-1, "icons/mine.png"],
+    [0, "icons/blank.png"],
+    [1, "icons/num1.png"],
+    [2, "icons/num2.png"],
+    [3, "icons/num3.png"],
+    [4, "icons/num4.png"],
+    [5, "icons/num5.png"],
+    [6, "icons/num6.png"],
+    [7, "icons/num7.png"],
+    [8, "icons/num8.png"]
 ]);
 
 function genGrid () {
